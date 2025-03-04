@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Звук на переходе</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #222;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            background-color: #ff5722;
+            color: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Музыкальный сайт</h1>
+    <button id="toggleSound">Включить звук</button>
+
+    <script>
+        let audio = new Audio("ston_9zi2M1N.mp3");
+        audio.loop = true;
+
+        // Проверяем сохранённое состояние
+        let isPlaying = localStorage.getItem("audioPlaying") === "true";
+
+        if (isPlaying) {
+            audio.play();
+            document.getElementById("toggleSound").textContent = "Выключить звук";
+        }
+
+        document.getElementById("toggleSound").addEventListener("click", () => {
+            if (audio.paused) {
+                audio.play();
+                localStorage.setItem("audioPlaying", "true");
+                document.getElementById("toggleSound").textContent = "Выключить звук";
+            } else {
+                audio.pause();
+                localStorage.setItem("audioPlaying", "false");
+                document.getElementById("toggleSound").textContent = "Включить звук";
+            }
+        });
+    </script>
+</body>
+</html>
